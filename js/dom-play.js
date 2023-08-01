@@ -15,6 +15,19 @@
 */
 
 //document.querySelector(".hamlet").style.backgroundColor = "yellow";
+function highlight(el){
+
+    if(el.style.backgroundColor == 'white'){//orange
+        el.style.backgroundColor='orange';
+    }else{//white
+        el.style.backgroundColor='white';
+    }
+}
+/*
+function myAlert(){
+    alert("I'm clicked!");
+}
+*/
 
 function reverseHighlight() {
     const highlightedLines = document.querySelectorAll("[style='background-color: orange;']");
@@ -27,7 +40,7 @@ function highlightActor(actor){
     //alert("Hi, I'm " + actor);
     for(const mySpan of spans){
         if(actor == mySpan.dataset.actor){//current actor
-            mySpan.style.backgroundColor='blue';
+            mySpan.style.backgroundColor='orange';
         }else{//other actor
             mySpan.style.backgroundColor='white';
         }
@@ -37,17 +50,27 @@ function highlightActor(actor){
 const spans = document.querySelectorAll("#play span");
 console.log(spans);
 
+// for(const mySpan of spans){
+//     //mySpan.addEventListener("click", myAlert);
+//     mySpan.addEventListener("click",function(ev){
+//         highlightActor(mySpan.dataset.actor);
+//     });
+//     //alert(mySpan.dataset.actor);
+// }
+
+// document.addEventListener("click", function(ev) {
+//     const target = ev.target;
+//     if (!target.matches("#play span")) {
+//         reverseHighlight();
+//     }
+// });
+
 for(const mySpan of spans){
     //mySpan.addEventListener("click", myAlert);
     mySpan.addEventListener("click",function(ev){
-        highlightActor(mySpan.dataset.actor);
-    });
-    //alert(mySpan.dataset.actor);
-}
-
-document.addEventListener("click", function(ev) {
-    const target = ev.target;
-    if (!target.matches("#play span")) {
-        reverseHighlight();
+        clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => {
+                highlightActor(mySpan.dataset.actor);
+            }, 150); 
+        });     //alert(mySpan.dataset.actor); 
     }
-});
